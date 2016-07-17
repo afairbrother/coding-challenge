@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 
+import Header from './components/Header/Header';
+import EditorPane from './components/EditorPane/EditorPane';
+import DocumentPane from './components/DocumentPane/DocumentPane';
+
 if ( 'undefined' !== typeof window ) {
     require( './styles/main.scss' );
 }
@@ -7,7 +11,14 @@ if ( 'undefined' !== typeof window ) {
 export default class App extends Component {
   render() {
     return (
-      <h1>Other Test</h1>
+        <div>
+            <Header />
+            <div>
+                <EditorPane />
+                <DocumentPane />
+            </div>
+        </div>
+
     );
   }
 }
