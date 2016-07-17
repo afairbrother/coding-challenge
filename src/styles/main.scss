@@ -1,4 +1,9 @@
 // main style bundle
-h1 {
-    color: red;
-}
+@import './fonts';
+@import './vars';
+@import './normalize';
+
+// Components
+@import '../components/Header/Header';
+@import '../components/EditorPane/EditorPane';
+@import '../components/DocumentPane/DocumentPane';
