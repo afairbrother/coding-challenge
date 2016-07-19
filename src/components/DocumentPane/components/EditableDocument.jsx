@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 export default class EditableDocument extends Component {
 
     componentDidMount(){
-        const elements = document.getElementsByClassName('document-pane__document')[0].children;
+        const elements = document.getElementsByClassName('document-pane__editable-area')[0].children;
 
         console.log(elements);
         for(var i = 0; i < elements.length; i++){
@@ -11,7 +11,7 @@ export default class EditableDocument extends Component {
             elements[i].addEventListener('click', this._handleClick);
         }
 
-        const saveString = document.getElementsByClassName('document-pane__document')[0].innerHTML;
+        const saveString = document.getElementsByClassName('document-pane__editable-area')[0].innerHTML;
 
         localStorage.setItem('templateString', saveString);
 
@@ -26,16 +26,17 @@ export default class EditableDocument extends Component {
     maybeRenderSavedData(){
         if(localStorage.getItem('templateString')){
             const createMarkup = () => {
+                console.log(localStorage.getItem('templateString'));
                 return {__html: localStorage.getItem('templateString') };
             }
 
             return (
-                <div dangerouslySetInnerHTML={createMarkup()}>
+                <div className='document-pane__editable-area' dangerouslySetInnerHTML={createMarkup()}>
                 </div>
             );
         }else {
             return (
-                <div>
+                <div className='document-pane__editable-area'>
                     <h3>Newsletter Header</h3>
                     <p>
                         Hundreds of thousands venture, tingling of the spine. Prime number cosmic fugue Orion's
