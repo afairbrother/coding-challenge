@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 
+import EditableDocument from './components/EditableDocument';
 
-export default class Header extends Component {
+
+export default class DocumentPane extends Component {
   render() {
     return (
-      <header className='document-pane'>
-        <h3>DocumentPane</h3>
-      </header>
+      <div className='document-pane'>
+        <EditableDocument />
+      </div>
     );
   }
 }

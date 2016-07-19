@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 
-export default class Header extends Component {
+export default class EditorPane extends Component {
   render() {
     return (
       <header className='editor-pane'>
