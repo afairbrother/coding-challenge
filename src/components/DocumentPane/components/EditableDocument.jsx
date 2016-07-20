@@ -2,19 +2,31 @@ import React, { Component } from 'react';
 
 export default class EditableDocument extends Component {
 
-    componentDidMount(){
+    componentDidMount() {
         const elements = document.getElementsByClassName('document-pane__editable-area')[0].children;
 
-        console.log(elements);
         for(var i = 0; i < elements.length; i++){
             console.log('adding event listener');
             elements[i].addEventListener('click', this._handleClick);
         }
 
+        this._updateSaveTemplate();
+
+    }
+
+    _updateSaveTemplate = () => {
         const saveString = document.getElementsByClassName('document-pane__editable-area')[0].innerHTML;
 
-        localStorage.setItem('templateString', saveString);
+        this._saveData( 'templateString', saveString );
+    }
 
+    /**
+    * Update the data in localstorage
+    * @param propertyKey {string} - key in localstorage
+    * @param data - data to store with localstorage
+    */
+    _saveData = (propertyKey, data) => {
+        localStorage.setItem(propertyKey, data)
     }
 
     _handleClick = (e) => {
