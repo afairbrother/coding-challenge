@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 export default class EditableDocument extends Component {
 
-    componentDidMount(){
+    componentDidMount() {
         const elements = document.getElementsByClassName('document-pane__editable-area')[0].children;
 
         for(var i = 0; i < elements.length; i++){
