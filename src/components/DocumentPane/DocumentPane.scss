@@ -14,16 +14,18 @@
         padding: 20px;
         margin-top: 30px;
 
-        * {
-            &:hover {
-                border: 3px dashed $orange;
-            }
-        }
-
         h3 {
             width: 100%;
             text-align: center;
             font-size: 30px;
+        }
+    }
+
+    &__editable-area {
+       * {
+            &:hover {
+                border: 3px dashed $orange;
+            }
         }
     }
 }

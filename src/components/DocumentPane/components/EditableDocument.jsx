@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 
+
 export default class EditableDocument extends Component {
+
+    static propTypes = {
+        saveTemplate: React.PropTypes.func,
+        handleUpdate: React.PropTypes.func
+    }
 
     componentDidMount() {
         const elements = document.getElementsByClassName('document-pane__editable-area')[0].children;
@@ -10,29 +16,15 @@ export default class EditableDocument extends Component {
             elements[i].addEventListener('click', this._handleClick);
         }
 
-        this._updateSaveTemplate();
-
-    }
-
-    _updateSaveTemplate = () => {
-        const saveString = document.getElementsByClassName('document-pane__editable-area')[0].innerHTML;
-
-        this._saveData( 'templateString', saveString );
-    }
-
-    /**
-    * Update the data in localstorage
-    * @param propertyKey {string} - key in localstorage
-    * @param data - data to store with localstorage
-    */
-    _saveData = (propertyKey, data) => {
-        localStorage.setItem(propertyKey, data)
+        this.props.saveTemplate();
     }
 
     _handleClick = (e) => {
-        console.log('handle the click');
+        const targetToUpdate = e.target.innerHTML;
+        console.log('e: ', e);
+        console.log('target: ', targetToUpdate);
 
-        // redux and editor stuff here
+        this.props.handleUpdate(e.path[0], targetToUpdate);
     }
 
     maybeRenderSavedData(){
