@@ -1,31 +1,67 @@
-import React, { Component } from 'react';
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
+import React, { Component, PropTypes } from 'react';
 
 import Header from '../components/Header/Header';
 import EditorPane from '../components/EditorPane/EditorPane';
 import DocumentPane from '../components/DocumentPane/DocumentPane';
 
-import * as EditorActions from '../actions'
 
 if ( 'undefined' !== typeof window ) {
     require( '../styles/main.scss' );
 }
 
-App.propTypes = {
-  editApp: PropTypes.array.isRequired,
-  actions: PropTypes.object.isRequired
-}
+export default class App extends Component {
 
-class App extends Component {
+    _updateSaveTemplate = () => {
+        const saveString = document.getElementsByClassName('document-pane__editable-area')[0].innerHTML;
+
+        this._saveData( 'templateString', saveString );
+    }
+
+    state = {
+        text: 'Test'
+    };
+
+
+    /**
+    * Update the data in localstorage
+    * @param propertyKey {string} - key in localstorage
+    * @param data - data to store with localstorage
+    */
+    _saveData = (propertyKey, data) => {
+        localStorage.setItem(propertyKey, data)
+    }
+
+    handleTextUpdate(element, text){
+        console.log('it worked');
+        console.log('element: ', element);
+        console.log('text: ', text);
+
+        this.setState({
+            text: text
+        })
+    }
+
+    updateText(){
+
+    }
+
+    handleSaveTemplate(){
+        const saveString = document.getElementsByClassName('document-pane__editable-area')[0].innerHTML;
+        this._saveData( 'templateString', saveString );
+        console.log('saveTemplate worked');
+    }
+
+    shouldComponentUpdate(nextProps, nextState){
+        return nextState.text !== this.state.text
+    }
+
   render() {
-    const { editApp, actions } = this.props
     return (
         <div>
             <Header />
             <div>
-                <EditorPane />
-                <DocumentPane />
+                <EditorPane updateText={this.updateText.bind(this)} textToShow={this.state.text} />
+                <DocumentPane saveTemplate={this.handleSaveTemplate.bind(this)} handleUpdate={this.handleTextUpdate.bind(this)} />
             </div>
         </div>
 
@@ -33,19 +69,3 @@ class App extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    editApp: edit.editApp
-  }
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators(EditorActions, dispatch)
-  }
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App)
