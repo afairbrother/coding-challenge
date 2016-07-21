@@ -1,17 +1,19 @@
-const EditApp = (state, action) => {
+const editApp = (state, action) => {
   switch (action.type) {
     case 'EDIT_TEXT':
       return {
         element: action.element,
         text: action.text
       }
+      break;
     case 'SAVE_TEMPLATE':
       return {
-        isSaved: true
+        updatedString: action.uString
       }
+      break;
     default:
       return state
   }
 }
 
-export default EditApp;
+export default editApp;

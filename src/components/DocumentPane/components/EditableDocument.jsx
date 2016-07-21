@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import editText from '../../../actions';
+import saveTemplate from '../../../actions';
 
 export default class EditableDocument extends Component {
 
