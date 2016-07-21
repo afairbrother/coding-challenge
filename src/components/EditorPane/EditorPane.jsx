@@ -1,12 +1,21 @@
 import React, { Component } from 'react';
+import ReactQuill from 'react-quill';
 
 
 export default class EditorPane extends Component {
   render() {
     return (
-      <header className='editor-pane'>
-        <h3>EditorPane</h3>
-      </header>
+      <div className='editor-pane'>
+        <ReactQuill>
+                <ReactQuill.Toolbar key="toolbar"
+                                    ref="toolbar"
+                                    items={ReactQuill.Toolbar.defaultItems} />
+                <div key="editor"
+                     ref="editor"
+                     className="quill-contents"
+                     dangerouslySetInnerHTML={{__html:"a string"}} />
+              </ReactQuill>
+      </div>
     );
   }
 }
