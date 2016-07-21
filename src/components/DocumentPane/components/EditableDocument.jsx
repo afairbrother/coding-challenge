@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 
-
+/**
+* EDITABLE DOCUMENT CLASS
+* @prop {func} - saveTemplate - function passed in from documentPane to handle saving the template after update
+* @prop {func} - handleUpdate - function passed in from documentPane to allow app to be aware of which element is being updated
+*/
 export default class EditableDocument extends Component {
 
     static propTypes = {
@@ -8,29 +12,32 @@ export default class EditableDocument extends Component {
         handleUpdate: React.PropTypes.func
     }
 
+    // attach the event listeners when the component is ready
     componentDidMount() {
         const elements = document.getElementsByClassName('document-pane__editable-area')[0].children;
 
+        // for every element inside this class apply a click event listener
         for(var i = 0; i < elements.length; i++){
-            console.log('adding event listener');
             elements[i].addEventListener('click', this._handleClick);
         }
 
+        // tell the app to save this existing template
         this.props.saveTemplate();
     }
 
+    // tell the app about which target is being selected and its text
     _handleClick = (e) => {
         const targetToUpdate = e.target.innerHTML;
-        console.log('e: ', e);
-        console.log('target: ', targetToUpdate);
-
         this.props.handleUpdate(e.path[0], targetToUpdate);
     }
 
+    // if there is saved data, render it from the template string localstorage key
+    // otherwise, render the fake template. It will then be saved
     maybeRenderSavedData(){
         if(localStorage.getItem('templateString')){
+            // use this function to help ensure that we are only passing HTML
+            // into dangerouslySetInnerHTML. Ideally we would also sanitize this data
             const createMarkup = () => {
-                console.log(localStorage.getItem('templateString'));
                 return {__html: localStorage.getItem('templateString') };
             }
 

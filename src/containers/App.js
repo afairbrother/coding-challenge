@@ -9,6 +9,12 @@ if ( 'undefined' !== typeof window ) {
     require( '../styles/main.scss' );
 }
 
+/**
+* APP CLASS
+* This class handles the basic control of the app and passes values to the components.
+* Ideally, we'd move a lot of this logic into redux or some other communication method.
+* Right now it uses callback functions. It works, but doesn't scale well.
+*/
 export default class App extends Component {
 
     _updateSaveTemplate = () => {
@@ -17,6 +23,7 @@ export default class App extends Component {
         this._saveData( 'templateString', saveString );
     }
 
+    // manage the state of what text is appearing in the editor and what will be stuck to an element
     state = {
         text: 'Click any text element to update it',
         editingElement: ''
@@ -32,27 +39,25 @@ export default class App extends Component {
         localStorage.setItem(propertyKey, data)
     }
 
+    // update the state when the text in the editor has been changed
     handleTextUpdate(element, text){
         this.setState({
             text: text,
             editingElement: element
         });
     }
-
     updateText(text){
-        console.log('sent it back');
         this.setState({
             text: text
         });
     }
 
     handleSaveTemplate(){
-        console.log('called saveTemplate? ');
         const saveString = document.getElementsByClassName('document-pane__editable-area')[0].innerHTML;
         this._saveData( 'templateString', saveString );
-        console.log('saveTemplate worked');
     }
 
+    // make sure the render function is called only when needed
     shouldComponentUpdate(nextProps, nextState){
         return nextState.text !== this.state.text
     }
