@@ -3,14 +3,23 @@ import ReactQuill from 'react-quill';
 
 
 export default class EditorPane extends Component {
+    static propTypes = {
+        updateText: React.PropTypes.func,
+        textToShow: React.PropTypes.string
+    }
 
   shouldComponentUpdate(nextProps, nextState){
-    console.log('should I update?');
     return nextProps.textToShow != this.props.textToShow
   }
 
   state = {
     text: this.props.textToShow
+  }
+
+  onTextChange = (value) => {
+    this.setState({
+        text: value
+    });
   }
 
   render() {

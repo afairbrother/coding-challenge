@@ -37,12 +37,16 @@ export default class App extends Component {
         console.log('text: ', text);
 
         this.setState({
-            text: text
+            text: text,
+            editingElement: element
         })
     }
 
-    updateText(){
-
+    updateText(text){
+        console.log('update the text now');
+        this.setState({
+            text: text
+        });
     }
 
     handleSaveTemplate(){
