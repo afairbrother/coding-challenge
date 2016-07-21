@@ -18,7 +18,8 @@ export default class App extends Component {
     }
 
     state = {
-        text: 'Test'
+        text: 'Click any text element to update it',
+        editingElement: ''
     };
 
 
@@ -32,14 +33,10 @@ export default class App extends Component {
     }
 
     handleTextUpdate(element, text){
-        console.log('it worked');
-        console.log('element: ', element);
-        console.log('text: ', text);
-
         this.setState({
             text: text,
             editingElement: element
-        })
+        });
     }
 
     updateText(text){
@@ -50,6 +47,7 @@ export default class App extends Component {
     }
 
     handleSaveTemplate(){
+        console.log('called saveTemplate? ');
         const saveString = document.getElementsByClassName('document-pane__editable-area')[0].innerHTML;
         this._saveData( 'templateString', saveString );
         console.log('saveTemplate worked');
@@ -65,7 +63,9 @@ export default class App extends Component {
             <Header />
             <div>
                 <EditorPane updateText={this.updateText.bind(this)} textToShow={this.state.text} />
-                <DocumentPane saveTemplate={this.handleSaveTemplate.bind(this)} handleUpdate={this.handleTextUpdate.bind(this)} />
+                <DocumentPane saveTemplate={this.handleSaveTemplate.bind(this)}
+                    handleUpdate={this.handleTextUpdate.bind(this)}
+                    replaceTarget={this.state.editingElement} replaceText={this.state.text} />
             </div>
         </div>
 

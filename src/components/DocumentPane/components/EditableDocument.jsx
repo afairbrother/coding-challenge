@@ -17,14 +17,14 @@ export default class EditableDocument extends Component {
         }
 
         this.props.saveTemplate();
-
     }
 
     _handleClick = (e) => {
         const targetToUpdate = e.target.innerHTML;
+        console.log('e: ', e);
         console.log('target: ', targetToUpdate);
 
-        this.props.handleUpdate(e.target, targetToUpdate);
+        this.props.handleUpdate(e.path[0], targetToUpdate);
     }
 
     maybeRenderSavedData(){
