@@ -20,6 +20,8 @@ export default class EditorPane extends Component {
     this.setState({
         text: value
     });
+
+    this.props.updateText(value);
   }
 
   render() {

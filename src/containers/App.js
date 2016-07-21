@@ -43,7 +43,7 @@ export default class App extends Component {
     }
 
     updateText(text){
-        console.log('update the text now');
+        console.log('sent it back');
         this.setState({
             text: text
         });
