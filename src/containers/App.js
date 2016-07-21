@@ -40,17 +40,14 @@ export default class App extends Component {
     }
 
     updateText(text){
-        console.log('sent it back');
         this.setState({
             text: text
         });
     }
 
     handleSaveTemplate(){
-        console.log('called saveTemplate? ');
         const saveString = document.getElementsByClassName('document-pane__editable-area')[0].innerHTML;
         this._saveData( 'templateString', saveString );
-        console.log('saveTemplate worked');
     }
 
     shouldComponentUpdate(nextProps, nextState){

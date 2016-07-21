@@ -10,13 +10,10 @@ export default class DocumentPane extends Component {
     }
 
     shouldComponentUpdate(nextProps, nextState){
-        console.log('should the document pane update?');
         return nextProps.replaceText != this.props.replaceText;
     }
 
     updateTemplate = () => {
-        console.log('updating the template', this.props.replaceTarget.tagName);
-        console.log('element: ', element);
         const elementTag = this.props.replaceTarget.tagName;
         const element = document.getElementsByClassName('document-pane__editable-area')[0];
 

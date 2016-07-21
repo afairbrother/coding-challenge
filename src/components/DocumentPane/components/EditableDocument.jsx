@@ -12,7 +12,6 @@ export default class EditableDocument extends Component {
         const elements = document.getElementsByClassName('document-pane__editable-area')[0].children;
 
         for(var i = 0; i < elements.length; i++){
-            console.log('adding event listener');
             elements[i].addEventListener('click', this._handleClick);
         }
 
@@ -21,16 +20,12 @@ export default class EditableDocument extends Component {
 
     _handleClick = (e) => {
         const targetToUpdate = e.target.innerHTML;
-        console.log('e: ', e);
-        console.log('target: ', targetToUpdate);
-
         this.props.handleUpdate(e.path[0], targetToUpdate);
     }
 
     maybeRenderSavedData(){
         if(localStorage.getItem('templateString')){
             const createMarkup = () => {
-                console.log(localStorage.getItem('templateString'));
                 return {__html: localStorage.getItem('templateString') };
             }
 
