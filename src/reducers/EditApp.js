@@ -1,19 +1,14 @@
 const EditApp = (state, action) => {
   switch (action.type) {
-    case 'ADD_TODO':
+    case 'EDIT_TEXT':
       return {
-        id: action.id,
-        text: action.text,
-        completed: false
+        element: action.element,
+        text: action.text
       }
-    case 'TOGGLE_TODO':
-      if (state.id !== action.id) {
-        return state
+    case 'SAVE_TEMPLATE':
+      return {
+        isSaved: true
       }
-
-      return Object.assign({}, state, {
-        completed: !state.completed
-      })
     default:
       return state
   }
